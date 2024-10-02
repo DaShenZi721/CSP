@@ -1,6 +1,6 @@
 #!/bin/bash
 model_name=mega
-# sliceformer transformer mega
+# transformer mega
 dataset_name=path-x
 # listops imdb-4000 aan cifar10 pathfinder path-x
 

@@ -318,27 +318,6 @@ class LRAEncoder(FairseqEncoder):
                 max_seq_len=args.max_positions,
                 sen_rep_type=getattr(args, 'sen_rep_type', 'mp')
             )
-        elif args.layer_type == 'sliceformer':
-            self.encoder = SliceformerLRAEncoder(
-                padding_idx=padding_idx,
-                vocab_size=vocab_size,
-                num_encoder_layers=args.encoder_layers,
-                embedding_type=embedding_type,
-                embedding_dim=args.encoder_embed_dim,
-                ffn_embedding_dim=args.encoder_ffn_embed_dim,
-                num_attention_heads=args.encoder_attention_heads,
-                dropout=args.dropout,
-                attention_dropout=args.attention_dropout,
-                activation_dropout=args.act_dropout,
-                max_seq_len=args.max_positions,
-                use_position_embeddings=True,
-                offset_positions_by_padding=offset_positions_by_padding,
-                encoder_normalize_before=getattr(args, "encoder_normalize_before", False),
-                apply_bert_init=getattr(args, "apply_bert_init", False),
-                activation_fn=args.activation_fn,
-                learned_pos_embedding=args.encoder_learned_pos,
-                sen_rep_type=getattr(args, 'sen_rep_type', 'cls')
-            )
         else:
             self.encoder = LunaLRAEncoder(
                 tie_layer_weights=getattr(args, 'tie_layer_weights', False),

@@ -98,7 +98,7 @@ class MovingAverageGatedAttention(nn.Module):
         
         # Sliceformer
         print('ATTENTION!!! Using Sliceformer!!!')
-        self.swd = SWD23(layer_idx=layer_idx, num_layers=num_layers, dim=hdim)
+        self.swd = SWD(layer_idx=layer_idx, num_layers=num_layers, dim=hdim)
         
     def prepare_for_onnx_export_(self):
         self.onnx_trace = True

@@ -66,7 +66,7 @@ class Attention(nn.Module):
         project_out = not (self.heads == 1 and dim_head == dim)
 
         self.scale = dim_head ** -0.5
-        self.swd = SWD21(args, layer_idx=layer_idx)
+        self.swd = SWD(args, layer_idx=layer_idx)
         self.sink = SinkhornDistance(eps=1, max_iter=3)
         self.attend = nn.Softmax(dim=-1)
         self.dropout = nn.Dropout(dropout)
@@ -109,9 +109,6 @@ class Attention(nn.Module):
             v = self.to_qkv(x)
             out = self.swd(v)
             attn_map = out
-        
-        U, S, Vh = torch.linalg.svd(out)
-        print(S[0])
             
         return self.to_out(out), attn_map
 
@@ -132,7 +129,6 @@ class Transformer(nn.Module):
             x = attn_x + x
             x = ff(x) + x            
             attn_weights.append(attn_map.detach().clone().cpu())
-        1/0
             
         return x, attn_weights
 
